@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="../css/main.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/hazzik-jquery.livequery/1.3.6/jquery.livequery.js"></script>
+    <script src="https://cdn.bootcss.com/knockout/3.4.2/knockout-min.js"></script>
+    <script src="../../lib/knockout/knockout.multimodels.min.js"></script>
+
+    <script src="../js/jqAjax.js"></script>
+
+    <link href="../../src/vs-ko/css/vsMask.css" rel="stylesheet" />
+    <link href="../../src/vs-ko/css/vsPage.css" rel="stylesheet" />
+    <link href="../../src/vs-ko/css/vsGrid.css" rel="stylesheet" />
+    <script src="../../src/vs-ko/js/vsMask.js"></script>
+    <script src="../../src/vs-ko/js/vsPage.js"></script>
+    <script src="../../src/vs-ko/js/vsGrid.js"></script>
+    <!-- <link href="../../dist/vs-ko/css/vs-ko.min.css" rel="stylesheet" />
+    <script src="../../dist/vs-ko/js/vs-ko.min.js"></script> -->
+    <script>
+        +function (window, document, $, ko, undefined) {
+            var defaults = {
+                viewName: "",
+                listApiUrl: ""
+            };
+
+            function ViewModel(config) {
+                var self = this;
+                self.config = config;
+
+                initUI.call(self);
+                initGrid.call(self);
+            }
+
+            function initUI() {
+                var self = this;
+
+                self.rowOpts = ["detail", "edit", "del"]
+
+                self.domEvent = {
+                    search: function () {
+                        self.queryFn.search();
+                    },
+                    reset: function () {
+                        self.queryFn.reset();
+                    },
+                    detail: function (row) {
+                        alert("详细" + row.id);
+                    },
+                    edit: function (row) {
+                        alert("编辑" + row.id);
+                    },
+                    del: function (row) {
+                        alert("删除" + row.id);
+                    },
+                    dels: function () {
+                        if (self.gridVM.getCheckedData() == "") {
+                            alert("请选择删除项!");
+                            return;
+                        }
+                        var list = self.gridVM.getCheckedData().split(",");
+                        if (list.length == 0) {
+                            alert("请选择删除项!");
+                            return;
+                        }
+
+                        alert("删除" + list);
+                    },
+                    sel: function(){
+                        var rows = self.gridVM.getCheckedRow();
+                        if(rows.length > 0){
+                            alert(rows[0]["id"])
+                        }
+                    }
+                };
+            }
+
+            function initGrid() {
+                var self = this;
+
+                self.query = {
+                    name: ko.observable(),
+                    code: ko.observableArray()
+                };
+
+                //查询区域的按钮事件
+                self.queryFn = {
+                    reset: function () {
+                        self.query.name(null);
+                        self.query.code(null);
+                    },
+                    params: {
+                        "name_like": self.query.name,
+                        "code_in": self.query.code
+                    },
+                    search: function () {
+                        self.gridVM.reload(self.queryFn.params);
+                    }
+                };
+
+                //初始化界面的表格控件
+                self.gridVM = new ko.vsGrid.ViewModel({
+                    url: self.config.listApiUrl,
+                    query: self.queryFn.params,
+                    isInitLoad: true,
+                    headers: [[{
+                        title: "",
+                        //checkbox: true,
+                        width: "25px"
+                    }, {
+                        title: "NAME",
+                        width: "200px"
+                    }, {
+                        title: "CODE",
+                        width: "200px"
+                    }, {
+                        title: "操作",
+                        width: "120px"
+                    }]],
+                    columns: [{
+                        field: "id",
+                        radio: true,
+                        align: "center"
+                    }, {
+                        field: "name",
+                        align: "center"
+                    }, {
+                        field: "code",
+                        align: "center",
+                        formatter: function (value, row) {
+                            return value;
+                        }
+                    }, {
+                        field: "",
+                        align: "center",
+                        options: self.rowOpts
+                    }],
+                    rowOpts: {
+                        detail: {
+                            html: function (row, grid) {
+                                return "详细";
+                            },
+                            click: function (row, grid) {
+                                self.domEvent.detail(row);
+                            }
+                        },
+                        edit: {
+                            html: function (row, grid) {
+                                return "编辑";
+                            },
+                            click: function (row, grid) {
+                                self.domEvent.edit(row);
+                            }
+                        },
+                        del: {
+                            html: function (row, grid) {
+                                return "删除";
+                            },
+                            click: function (row, grid) {
+                                self.domEvent.del(row);
+                            }
+                        }
+                    }
+                });
+            }
+
+            $(function () {
+                var config = $.extend(true, {}, defaults, window.$vsViewConfig)
+                var viewModel = new ViewModel(config)
+                ko.attach(config.viewName, viewModel)
+            })
+        }(window, document, jQuery, ko);
+    </script>
+    <script>
+        window.$vsViewConfig = {
+            viewName: "viewName"
+        }
+    </script>
+</head>
+
+<body>
+    <div data-model="viewName">
+        <input type="button" value="批量删除" data-bind="click:domEvent.dels" />
+        <input type="button" value="选择" data-bind="click:domEvent.sel" />
+        <div data-bind="vsGrid:gridVM, gridTemplate:'gridTemplate',pageTemplate:'pageTemplate'"></div>
+    </div>
+</body>
+
+<script id="pageTemplate" type="text/html">
+    <div class="vs-page">
+		<a data-bind="css:{ p_first: canPrev(), p_first_disabled: !canPrev() }, click: goFirst"><span></span>首页</a>
+		<a data-bind="css:{ p_pre: canPrev(), p_pre_disabled: !canPrev() }, click: goPrev"><span></span>上一页</a>
+		<span class="page_num">
+			<strong data-bind="text: currentPageIndex"></strong>/<strong data-bind="text: maxPageIndex"></strong>
+		</span>
+		<a data-bind="css :{ p_next: canNext(), p_next_disabled: !canNext() }, click: goNext"><span></span>下一页</a>
+		<a data-bind="css :{ p_last: canNext(), p_last_disabled: !canNext() }, click: goLast"><span></span>末页</a>
+		<label>总记录<span data-bind="text: totalCount" class="page_total"></span>条&nbsp;每页
+			<select data-bind="options: pages, value: pageSize, event: { change: pageSizeChanged }"></select>
+		</label><label>跳转<input type="text" style="width:25px;" data-bind="value: jumpPage" />
+		</label><input type="button" class="pagego" value="GO" data-bind="click: jump" />
+    </div>
+</script>
+
+<script id="gridTemplate" type="text/html">
+    <table class="vs-grid">
+        <thead>
+            <!-- ko foreach: options.headers -->
+            <tr data-bind="foreach: $data">
+                <th data-bind="attr:{ rowspan: rowspan, colspan: colspan, align:align },style:{ width:width }">
+                    <!-- ko if: checkbox == true -->
+                    <input type="checkbox" data-bind="value:'', attr:{ name: 'chb' }
+                        , click:function(){ $root.checkAll($element);return true; }" />
+                    <!-- /ko -->
+                    <!-- ko if: checkbox == false -->
+                    <!-- ko text: title --><!-- /ko -->
+                    <!-- /ko -->
+                </th>
+            </tr>
+            <!-- /ko -->
+        </thead>
+
+        <tbody>
+            <!-- ko if: data().length == 0 -->
+            <tr>
+                <td align="center" height="250px" data-bind="attr:{ colSpan: options.columns.length }">
+                        暂无数据
+                </td>
+            </tr>
+            <!-- /ko -->
+
+            <!-- ko foreach: data -->
+            <tr data-bind="foreach: $root.options.columns,
+                            css: $root.getRowStyle($element, $data)">
+                <td data-bind="attr:{ align:align },style:{ width:width }">
+                    <!-- ko if: checkbox == true -->
+                    <input type="checkbox" data-bind="value:$parent[$root.options.idKey]
+                        , attr:{ name: 'chb' }
+                        , click:function(){ $root.check($element);return true; }" />
+                    <!-- /ko -->
+
+                    <!-- ko if: radio == true -->
+                    <input type="radio" data-bind="value:$parent[$root.options.idKey]
+                        , attr:{ name: 'rad' }
+                        , click:function(){ $root.check($element);return true; }" />
+                    <!-- /ko -->
+
+                    <!-- ko if: checkbox == false && radio == false && options.length > 0 -->
+                    <!-- ko foreach: options -->
+                    <a href="#" data-bind="html:$root.options.rowOpts[$data].html($parents[1], $root), click:function(){ $root.options.rowOpts[$data].click($parents[1],$root); }"></a>
+                    <!-- /ko -->
+                    <!-- /ko -->
+
+                    <!-- ko if: checkbox == false && radio == false && options.length == 0 && formatter == null-->
+                        <!-- ko text: $parent[field] --><!-- /ko -->
+                    <!-- /ko -->
+
+                    <!-- ko if: checkbox == false && radio == false && options.length == 0 && formatter != null -->
+                        <div data-bind="html:formatter($parent[field], $parent)"></div>
+                    <!-- /ko -->
+                </td>
+            </tr>
+            <!-- /ko -->
+
+            <!-- ko if: data().length > 0 && data().length < 10 -->
+            <tr>
+                <td data-bind="attr:{ colSpan: $root.options.columns.length, height: (10-data().length)*25 }">
+                </td>
+            </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+</script>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="../css/main.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/hazzik-jquery.livequery/1.3.6/jquery.livequery.js"></script>
+    <script src="https://cdn.bootcss.com/knockout/3.4.2/knockout-min.js"></script>
+    <script src="../../lib/knockout/knockout.multimodels.min.js"></script>
+
+    <link href="../../src/vs-ko/css/vsPage.css" rel="stylesheet" />
+    <script src="../../src/vs-ko/js/vsPage.js"></script>
+    <!-- <link href="../../dist/vs-ko/css/vs-ko.min.css" rel="stylesheet" />
+    <script src="../../dist/vs-ko/js/vs-ko.min.js"></script> -->
+    <script>
+        +function (window, document, $, ko, undefined) {
+            var defaults = {
+                viewName: ""
+            };
+
+            function ViewModel(config) {
+                var self = this;
+                self.config = config;
+
+                initUI.call(self);
+            }
+
+            function initUI() {
+                var self = this;
+                
+                var total = 100;
+
+                self.pageVM = new ko.vsPage.ViewModel({
+                    pageChanged: function(index, size){
+                        self.pageVM.totalCount(total);
+				        self.pageVM.currentPageIndex(index);
+                    }
+                })
+
+                self.pageVM.totalCount(total)
+
+                self.domEvent = {
+                };
+            }
+
+            $(function () {
+                var config = $.extend(true, {}, defaults, window.$vsViewConfig)
+                var viewModel = new ViewModel(config)
+                ko.attach(config.viewName, viewModel)
+            })
+        }(window, document, jQuery, ko);
+    </script>
+    <script>
+        window.$vsViewConfig = {
+            viewName: "viewName"
+        }
+    </script>
+</head>
+<body>
+    <div data-model="viewName" data-bind="vsPage:pageVM, pageTemplate:'pageTemplate'"></div>
+</body>
+
+<script id="pageTemplate" type="text/html">
+    <div class="vs-page">
+		<a data-bind="css:{ p_first: canPrev(), p_first_disabled: !canPrev() }, click: goFirst"><span></span>首页</a>
+		<a data-bind="css:{ p_pre: canPrev(), p_pre_disabled: !canPrev() }, click: goPrev"><span></span>上一页</a>
+		<span class="page_num">
+			<strong data-bind="text: currentPageIndex"></strong>/<strong data-bind="text: maxPageIndex"></strong>
+		</span>
+		<a data-bind="css :{ p_next: canNext(), p_next_disabled: !canNext() }, click: goNext"><span></span>下一页</a>
+		<a data-bind="css :{ p_last: canNext(), p_last_disabled: !canNext() }, click: goLast"><span></span>末页</a>
+		<label>总记录<span data-bind="text: totalCount" class="page_total"></span>条&nbsp;每页
+			<select data-bind="options: pages, value: pageSize, event: { change: pageSizeChanged }"></select>
+		</label><label>跳转<input type="text" style="width:25px;" data-bind="value: jumpPage" />
+		</label><input type="button" class="pagego" value="GO" data-bind="click: jump" />
+    </div>
+</script>
+
+</html>

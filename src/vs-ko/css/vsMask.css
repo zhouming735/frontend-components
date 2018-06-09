@@ -1,0 +1,37 @@
+/**遮罩层**/
+.vs-mask {
+	background: #ccc;
+	z-index: 9999;
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: none;
+}
+
+.vs-mask-box {
+	z-index: 10000;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: none;
+}
+
+.vs-mask-box-content {
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: center;
+	border: 2px solid #949494;
+	padding-left: 10px;
+	background: #fff url(images/vs_loading.gif) no-repeat scroll 10px center;
+}

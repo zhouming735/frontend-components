@@ -1,0 +1,114 @@
+.vs-team-member-selector {
+	margin: 0 auto;
+	padding: 5px 0;
+}
+
+.vs-team-member-selector .vs-clear {
+	clear: both;
+	display: block;
+	float: none;
+	font-size: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	line-height: 0;
+}
+
+.vs-team-member-selector .vs-float-left {
+	float: left;
+	_display: inline;
+}
+
+.vs-team-member-selector .vs-float-right {
+	float: right;
+	_display: inline;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone01 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone02 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+	margin: 0 5px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone03 {
+	width: 80px;
+	padding-top: 80px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone04 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-header {
+	color: White;
+	background: url(images/vs_memberSelector_titleBG.gif);
+	line-height: 30px;
+	font-weight: bold;
+	text-indent: 3px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con {
+	
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-tree {
+	overflow: auto;
+	border: 1px solid #EFEFEF;
+	height: 287px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-btn {
+	background: url(images/vs_memberSelector_btn.png) no-repeat;
+	border: none;
+	width: 70px;
+	height: 22px;
+	margin: 0 5px 18px 5px;
+	cursor: pointer;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-input {
+	margin: 5px 5px;
+	padding: 0 5px;
+	width: 200px;
+	height: 22px;
+	line-height: 22px;
+	border: 1px #BED6E8 solid;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-select01 {
+	font-size: 13px;
+	border: 1px solid #EFEFEF;
+	width: 220px;
+	height: 287px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-select02 {
+	font-size: 13px;
+	border: 1px solid #EFEFEF;
+	width: 220px;
+	height: 321px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-select03 {
+	font-size: 13px;
+	border:none;
+	height: 287px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-footer {
+	padding-top: 5px;
+	text-align: right;
+}

@@ -1,0 +1,15 @@
+﻿<script id="pageTemplate" type="text/html">
+    <div class="vs-page">
+		<a data-bind="css:{ p_first: canPrev(), p_first_disabled: !canPrev() }, click: goFirst"><span></span>首页</a>
+		<a data-bind="css:{ p_pre: canPrev(), p_pre_disabled: !canPrev() }, click: goPrev"><span></span>上一页</a>
+		<span class="page_num">
+			<strong data-bind="text: currentPageIndex"></strong>/<strong data-bind="text: maxPageIndex"></strong>
+		</span>
+		<a data-bind="css :{ p_next: canNext(), p_next_disabled: !canNext() }, click: goNext"><span></span>下一页</a>
+		<a data-bind="css :{ p_last: canNext(), p_last_disabled: !canNext() }, click: goLast"><span></span>末页</a>
+		<label>总记录<span data-bind="text: totalCount" class="page_total"></span>条&nbsp;每页
+			<select data-bind="options: pages, value: pageSize, event: { change: pageSizeChanged }"></select>
+		</label><label>跳转<input type="text" style="width:25px;" data-bind="value: jumpPage" />
+		</label><input type="button" class="pagego" value="GO" data-bind="click: jump" />
+    </div>
+</script>

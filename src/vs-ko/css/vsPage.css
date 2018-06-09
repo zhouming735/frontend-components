@@ -1,0 +1,140 @@
+.vs-page {
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	height: 30px;
+	background: #fff;
+}
+
+.vs-page a.p_first_disabled, .vs-page a.p_first,
+	.vs-page a.p_first:hover, .vs-page a.p_first:active,
+	.vs-page a.p_pre_disabled, .vs-page a.p_pre,
+	.vs-page a.p_pre:hover, .vs-page a.p_pre:active,
+	.vs-page a.p_next_disabled, .vs-page a.p_next,
+	.vs-page a.p_next:hover, .vs-page a.p_next:active,
+	.vs-page a.p_last_disabled, .vs-page a.p_last,
+	.vs-page a.p_last:hover, .vs-page a.p_last:active
+	{
+	padding: 2px 5px;
+	margin: 2px;
+	border: 1px solid #aaaadd;
+	text-decoration: none;
+	color: #006699;
+	cursor: pointer;
+}
+
+.vs-page a.p_first_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_first {
+	
+}
+
+.vs-page a.p_first:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_first:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_pre_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_pre {
+	
+}
+
+.vs-page a.p_pre:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_pre:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_next_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_next {
+	
+}
+
+.vs-page a.p_next:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_next:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_last_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_last {
+	
+}
+
+.vs-page a.p_last:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_last:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page .pagego {
+	width: 40px;
+	height: 22px;
+	cursor: pointer;
+}
+
+.vs-page input[type=text] {
+	padding: 0 2px;
+	width: 30px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.vs-page select {
+	vertical-align: middle;
+	display: inline-block;
+	height: 22px;
+	margin-top: -3px;
+}
+
+.vs-page strong {
+	color: #3D89E0;
+}

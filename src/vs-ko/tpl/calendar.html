@@ -1,0 +1,134 @@
+﻿<script id="calendarTemplate" type="text/html">
+    <div class="vs-calendar">
+        <div class="vs-calendar-dpTitle">
+            <div class="vs-calendar-NavImg vs-calendar-NavImgll" data-bind="click:setPrevYear">
+                <a></a>
+            </div>
+            <div class="vs-calendar-NavImg vs-calendar-NavImgl" data-bind="click:setPrevMonth">
+                <a></a>
+            </div>
+            <div style="float: left; ">
+                <div class="vs-calendar-menuSel vs-calendar-YMenu" style="left: 56px;">
+                    <table border="0" cellspacing="0" cellpadding="3" nowrap="nowrap">
+                        <tbody data-bind="foreach: {data:mYear, as:'myear'}">
+                            <tr nowrap="nowrap" data-bind="foreach: {data:myear, as:'item'}">
+                                <td class="vs-calendar-menu" data-bind="text:item.yearStr, click:function(){ $root.setYear(item.year) }"
+                                    onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'" ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table align="center" border="0" cellspacing="0" cellpadding="3">
+                        <tbody>
+                            <tr>
+                                <td class="vs-calendar-menu" data-bind="click:function(data, event){ $root.showYearList(data, event, $root.mYear()[0][0].year - 10) }, clickBubble:false"
+                                    onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'" >
+                                    ←
+                                </td>
+                                <td class="vs-calendar-menu" onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'" >×</td>
+                                <td class="vs-calendar-menu" data-bind="click:function(data, event){ $root.showYearList(data, event, $root.mYear()[0][0].year + 10) }, clickBubble:false"
+                                    onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'" >
+                                    →
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input class="vs-calendar-yminput" readonly="readonly" data-bind="value:getCurYearStr(), click:function(data, event){ $root.showYearList(data, event) }">
+            </div>
+            <div style="float: left;">
+                <div class="vs-calendar-menuSel vs-calendar-MMenu" style="left: 96px;">
+                    <table border="0" cellspacing="0" cellpadding="3" nowrap="nowrap">
+                        <tbody data-bind="foreach: {data:mMonth, as:'mmonth'}">
+                            <tr nowrap="nowrap" data-bind="foreach: {data:mmonth, as:'item'}">
+                                <td class="vs-calendar-menu" data-bind="text:item.monthStr, click:function(){ $root.setMonth(item.month) }"
+                                    onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input class="vs-calendar-yminput2" readonly="readonly" data-bind="value:getCurMonthStr(), click:function(data, event) { $root.showMonthList(data, event) }">
+            </div>
+            <div class="vs-calendar-NavImg vs-calendar-NavImgrr" data-bind="click:setNextYear">
+                <a></a>
+            </div>
+            <div class="vs-calendar-NavImg vs-calendar-NavImgr" data-bind="click:setNextMonth">
+                <a></a>
+            </div>
+            <div style="float: right;">
+            </div>
+        </div>
+        <!-- ko if: options.isShowDate -->
+        <div>
+            <table class="vs-calendar-WdayTable" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr align="center" class="vs-calendar-MTitle" data-bind="foreach:mTitle">
+                        <td data-bind="text:$data"></td>
+                    </tr>
+                    <!-- ko foreach: mDate -->
+                    <tr data-bind="foreach: week">
+                        <td data-bind="text:isDate==true?date:wk, css:css, 
+                            event:{
+                                click: function(){ if(isDate == true){ $root.setDate(year,month,date); }},
+                                mouseover: function(){ if(isDate == true){ $element.className = cssOn; }},
+                                mouseout: function(){ if(isDate == true){ $element.className = css; }}
+                            }, clickBubble: false, mouseoverBubble: false,mouseoutBubble: false"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: options.isShowTime -->
+        <div class="vs-calendar-dpTime">
+            <div class="vs-calendar-menuSel vs-calendar-HHMenu" style="left: 40px">
+                <table border="0" cellspacing="0" cellpadding="3" nowrap="nowrap">
+                    <tbody data-bind="foreach: {data:mHour, as:'mhour'}">
+                        <tr nowrap="nowrap" data-bind="foreach: {data:mhour, as:'item'}">
+                            <td class="vs-calendar-menu" data-bind="text:item.hourStr, click:function(){ $root.setHour(item.hour) }"
+                                onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="vs-calendar-menuSel vs-calendar-MMMenu" style="left: 40px;">
+                <table border="0" cellspacing="0" cellpadding="3" nowrap="nowrap">
+                    <tbody data-bind="foreach: {data:mMin, as:'mmin'}">
+                        <tr nowrap="nowrap" data-bind="foreach: {data:mmin, as:'item'}">
+                            <td class="vs-calendar-menu" data-bind="text:item.minStr, click:function(){ $root.setMin(item.min) }"
+                                onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="vs-calendar-menuSel vs-calendar-SSMenu" style="left: 40px;">
+                <table border="0" cellspacing="0" cellpadding="3" nowrap="nowrap">
+                    <tbody data-bind="foreach: {data:mSec, as:'msec'}">
+                        <tr nowrap="nowrap" data-bind="foreach: {data:msec, as:'item'}">
+                            <td class="vs-calendar-menu" data-bind="text:item.secStr, click:function(){ $root.setSec(item.sec) }"
+                                onmouseover="this.className='vs-calendar-menuOn'" onmouseout="this.className='vs-calendar-menu'"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td><span class="vs-calendar-dpTimeStr">时间</span><input 
+                            class="vs-calendar-dpTime-tB" maxlength="2" readonly="readonly" data-bind="value:getCurHourStr(), click:function(data, event) { $root.showHourList(data, event) }" /><input 
+                            class="vs-calendar-dpTime-tm" readonly="readonly" value=":" /><input 
+                            class="vs-calendar-dpTime-tM" maxlength="2" readonly="readonly" data-bind="value:getCurMinStr(), click:function(data, event) { $root.showMinList(data, event) }" /><input 
+                            class="vs-calendar-dpTime-tm" readonly="readonly" value=":" /><input 
+                            class="vs-calendar-dpTime-tE" maxlength="2" readonly="readonly" data-bind="value:getCurSecStr(), click:function(data, event) { $root.showSecList(data, event) }" /></td>
+                        <td><button class="vs-calendar-dpTimeUp" data-bind="click:setPrevTime" /><button class="vs-calendar-dpTimeDown" data-bind="click:setNextTime" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- /ko -->
+        <div class="vs-calendar-dpControl">
+            <input class="vs-calendar-dpButton" type="button" value="清空" data-bind="click:clear">
+            <input class="vs-calendar-dpButton" type="button" value="今天" data-bind="click:setToday">
+            <input class="vs-calendar-dpButton" type="button" value="确定" data-bind="click:confirm">
+        </div>
+    </div>
+</script>

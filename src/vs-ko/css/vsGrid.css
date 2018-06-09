@@ -1,0 +1,51 @@
+.vs-grid {
+	width: 100%;
+	border-top: 1px #afafaf solid;
+}
+
+.vs-grid tr {
+	color: #333;
+	height: 25px;
+	line-height: 25px;
+}
+
+.vs-grid tr.bg {
+	background: #fff;
+}
+
+.vs-grid tr.alterbg {
+	background: #f9f9f9;
+}
+
+.vs-grid tr.selectbg {
+	background: #4299cc;
+}
+
+.vs-grid th {
+	background: #f3f3f3;
+	white-space: nowrap;
+	text-align: center;
+	border-right: 1px #afafaf solid;
+	border-bottom: 1px #ddd solid;
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+}
+
+.vs-grid th:last-child {
+	border-right: 0;
+}
+
+.vs-grid td {
+	padding: 0 3px;
+	border-right: 1px #afafaf solid;
+	border-bottom: 1px #ddd solid;
+	empty-cells: show;
+}
+
+.vs-grid td a {
+	padding: 0 2px;
+}
+
+.vs-grid td:last-child {
+	border-right: 0;
+}

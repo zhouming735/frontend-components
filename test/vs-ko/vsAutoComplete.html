@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="../css/main.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/hazzik-jquery.livequery/1.3.6/jquery.livequery.js"></script>
+    <script src="https://cdn.bootcss.com/knockout/3.4.2/knockout-min.js"></script>
+    <script src="../../lib/knockout/knockout.multimodels.min.js"></script>
+
+    <script src="../js/jqAjax.js"></script>
+
+    <link href="../../src/vs-ko/css/vsAutoComplete.css" rel="stylesheet" />
+    <script src="../../src/vs-ko/js/vsPage.js"></script>
+    <script src="../../src/vs-ko/js/vsAutoComplete.js"></script>
+    <!-- <link href="../../dist/vs-ko/css/vs-ko.min.css" rel="stylesheet" />
+    <script src="../../dist/vs-ko/js/vs-ko.min.js"></script> -->
+    <script>
+        +function (window, document, $, ko, undefined) {
+            var defaults = {
+                viewName: "",
+                autoUrl: ""
+            };
+
+            function ViewModel(config) {
+                var self = this;
+                self.config = config;
+
+                initUI.call(self);
+            }
+
+            function initUI() {
+                var self = this;
+
+                self.autoVM = new ko.vsAutoComplete.ViewModel({
+                    url : self.config.autoUrl,
+                    width: "350px",
+                    renderFn : function (item) {
+                        return "(" + item.code + ")" + item.name
+                    }
+                })
+        
+                self.domEvent = {
+                    showAutoVM : function(data, event){
+                        self.autoVM.show(event);
+                    }
+                };
+            }
+
+            $(function () {
+                var config = $.extend(true, {}, defaults, window.$vsViewConfig)
+                var viewModel = new ViewModel(config)
+                ko.attach(config.viewName, viewModel)
+            })
+        }(window, document, jQuery, ko);
+    </script>
+    <script>
+        window.$vsViewConfig = {
+            viewName: "viewName"
+        }
+    </script>
+</head>
+
+<body>
+    <div data-model="viewName">
+        <input type="text" style="width: 200px;" data-bind="textInput:autoVM.searchValue, click:domEvent.showAutoVM"  />
+    </div>
+
+    <div data-model="viewName" id="autoVM"
+		data-bind="vsAutoComplete:autoVM,autoCompleteTemplate:'autoCompleteTemplate'"></div>
+</body>
+
+<script id="autoCompleteTemplate" type="text/html">
+    <div class="vs-auto-complete" data-bind="visible: sourceData().length > 0, style: {width: options.width}">
+		<ul>
+			<!-- ko foreach: sourceData -->
+			<li data-bind="css: { keyhover: $index()==$root.keySelect() }, click:function(){ $root.confirm($data);return true; }">
+				<!-- ko text: $root.render($data) --><!-- /ko -->
+			</li>
+			<!-- /ko -->
+		</ul>
+		<!-- ko if: options.pagination == true -->
+		<div class="vs-auto-complete-page" >
+			<a href="javascript:" data-bind="click: goPrev">上一页</a>
+			<span>
+				<strong data-bind="text: currentPageIndex"></strong>/<strong data-bind="text: maxPageIndex"></strong>
+			</span>
+			<a href="javascript:" data-bind="click: goNext">下一页</a>
+		</div>
+		<!-- /ko -->
+    </div>
+</script>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="../css/main.css" rel="stylesheet" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script src="../js/jqAjax.js"></script>
+
+    <script>
+        +function (window, document, $, undefined) {
+            var defaults = {
+                listApiUrl: "http://aaa.qq.com"
+            };
+
+            function ViewModel(config) {
+                var self = this;
+                self.config = config;
+
+                initUI.call(self);
+                initGrid.call(self);
+            }
+
+            function initUI() {
+                var self = this;
+            }
+
+            function initGrid() {
+                var self = this;
+                
+                $('#table').bootstrapTable({
+                    url: self.config.listApiUrl,
+                    jqAjax: true,
+                    cache: false,
+                    pagination: true,
+                    sidePagination: "server",
+                    columns: [{
+                        field: 'name',
+                        title: 'NAME'
+                    }, {
+                        field: 'code',
+                        title: 'CODE'
+                    }]
+                })
+            }
+
+            $(function () {
+                var config = $.extend(true, {}, defaults, window.$vsViewConfig)
+                new ViewModel(config)
+            })
+        }(window, document, jQuery);
+    </script>
+    <script>
+        window.$vsViewConfig = {
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <input type="button" value="批量删除" />
+        <input type="button" value="选择" />
+    </div>
+    <table id="table"></table>
+</body>
+
+</html>

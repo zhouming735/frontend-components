@@ -1,0 +1,62 @@
+
+/**浮动层**/
+.vs-simplemodal-overlay {
+	background: #ccc;
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+}
+
+.vs-simplemodal-modalCloseImg {
+	background: url(images/vs_clientWindow_coolite.gif) no-repeat 0px 0px;
+	width: 15px;
+	height: 15px;
+	display: inline;
+	z-index: 3200;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}
+
+.vs-simplemodal-modalTitle {
+	height: 15px;
+	line-height: 15px;
+/* 	width: 280px; */
+	top: 5px;
+	left: 5px;
+	position: absolute;
+	display: inline;
+	z-index: 3200;
+	font-size: 14px;
+}
+
+.vs-simplemodal-close {
+	
+}
+
+.vs-simplemodal-container {
+	padding: 25px 5px 5px 5px;
+	background: url(images/vs_clientWindow_topLine.gif) repeat-x #EDF4FB;
+	border: 1px solid #93AAC6;
+	border-top: none;
+}
+
+.vs-simplemodal-top{
+ 	width: 100%;
+ 	height: 25px;
+ 	position: absolute;
+ 	top: 0;
+	left: 0;
+	display: inline;
+	z-index: 3100;
+    cursor: move;
+}
+
+
+.vs-simplemodal-wrap {
+	
+}
+
+.vs-simplemodal-data {
+	
+}

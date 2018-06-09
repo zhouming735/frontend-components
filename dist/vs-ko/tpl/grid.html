@@ -1,0 +1,71 @@
+﻿
+<script id="gridTemplate" type="text/html">
+    <table class="vs-grid">
+        <thead>
+            <!-- ko foreach: options.headers -->
+            <tr data-bind="foreach: $data">
+                <th data-bind="attr:{ rowspan: rowspan, colspan: colspan, align:align },style:{ width:width }">
+                    <!-- ko if: checkbox == true -->
+                    <input type="checkbox" data-bind="value:''
+                        , attr:{ name: 'chb' }
+                        , click:function(){ $root.checkAll($element);return true; }" />
+                    <!-- /ko -->
+                    <!-- ko if: checkbox == false -->
+                    <!-- ko text: title --><!-- /ko -->
+                    <!-- /ko -->
+                </th>
+            </tr>
+            <!-- /ko -->
+        </thead>
+
+        <tbody>
+            <!-- ko if: data().length == 0 -->
+            <tr>
+                <td align="center" height="250px" data-bind="attr:{ colSpan: options.columns.length }">
+                        暂无数据
+                </td>
+            </tr>
+            <!-- /ko -->
+
+            <!-- ko foreach: data -->
+            <tr data-bind="foreach: $root.options.columns,
+                            css: $root.getRowStyle($element, $data)">
+                <td data-bind="attr:{ align:align },style:{ width:width }">
+                    <!-- ko if: checkbox == true -->
+                    <input type="checkbox" data-bind="value:$parent[$root.options.idKey]
+                        , attr:{ name: 'chb' }
+                        , click:function(){ $root.check($element);return true; }" />
+                    <!-- /ko -->
+
+                    <!-- ko if: radio == true -->
+                    <input type="radio" data-bind="value:$parent[$root.options.idKey]
+                        , attr:{ name: 'rad' }
+                        , click:function(){ $root.check($element);return true; }" />
+                    <!-- /ko -->
+
+                    <!-- ko if: checkbox == false && radio == false && options.length > 0 -->
+                    <!-- ko foreach: options -->
+                    <a href="#" data-bind="html:$root.options.rowOpts[$data].html($parents[1], $root), click:function(){ $root.options.rowOpts[$data].click($parents[1],$root); }"></a>
+                    <!-- /ko -->
+                    <!-- /ko -->
+
+                    <!-- ko if: checkbox == false && radio == false && options.length == 0 && formatter == null-->
+                        <!-- ko text: $parent[field] --><!-- /ko -->
+                    <!-- /ko -->
+
+                    <!-- ko if: checkbox == false && radio == false && options.length == 0 && formatter != null -->
+                        <div data-bind="html:formatter($parent[field], $parent)"></div>
+                    <!-- /ko -->
+                </td>
+            </tr>
+            <!-- /ko -->
+
+            <!-- ko if: data().length > 0 && data().length < 10 -->
+            <tr>
+                <td data-bind="attr:{ colSpan: $root.options.columns.length, height: (10-data().length)*25 }">
+                </td>
+            </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+</script>

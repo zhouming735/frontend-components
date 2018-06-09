@@ -1,0 +1,29 @@
+﻿<script id="memberSelectorTemplate" type="text/html">
+    <div class="vs-member-selector" style="width: 550px;">
+        <div class="vs-float-left vs-member-selector-zone02">
+            <h3 class="vs-member-selector-zone-header">待选成员</h3>
+            <input type="text" class="vs-member-selector-zone-con-input"
+                   data-bind="textInput:searchValue, valueUpdate: 'afterkeydown'" />
+            <select multiple="multiple" class="vs-member-selector-zone-con-select01"
+                    data-bind="selectedOptions:selectSource, options:sourceData, optionsText:options.memberNameKey, optionsValue:options.memberIdKey, event:{dblclick:move}"></select>
+        </div>
+        <div class="vs-float-left vs-member-selector-zone03">
+            <ul>
+                <li><input type="button" value="选入>" class="vs-member-selector-zone-con-btn" data-bind="click:move,enable:selectSource() && selectSource().length > 0" /></li>
+                <li><input type="button" value="<移除" class="vs-member-selector-zone-con-btn" data-bind="click:remove,enable:selectTarget() && selectTarget().length > 0" /></li>
+                <li><input type="button" value="全选>>" class="vs-member-selector-zone-con-btn" data-bind="click:moveAll,enable:sourceData().length > 0" /></li>
+                <li><input type="button" value="<<全移" class="vs-member-selector-zone-con-btn" data-bind="click:removeAll,enable:targetData().length > 0" /></li>
+            </ul>
+        </div>
+        <div class="vs-float-left vs-member-selector-zone04">
+            <h3 class="vs-member-selector-zone-header">已选成员</h3>
+            <select multiple="multiple" class="vs-member-selector-zone-con-select02"
+                    data-bind="selectedOptions:selectTarget, options:targetData, optionsText:options.memberNameKey, optionsValue:options.memberIdKey, event:{dblclick:remove}"></select>
+        </div>
+        <div class="vs-clear"></div>
+        <div class="vs-member-selector-footer">
+            <input type="button" value="确定" class="vs-member-selector-zone-con-btn" data-bind="click:confirm" />
+            <input type="button" value="取消" class="vs-member-selector-zone-con-btn" data-bind="click:close" />
+        </div>
+    </div>
+</script>

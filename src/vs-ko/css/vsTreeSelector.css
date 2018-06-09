@@ -1,0 +1,8 @@
+/**树选择**/
+.vs-tree-selector-tree {
+	overflow: auto;
+	width: 250.0px;
+	max-height: 300.0px;
+	border: 1.0px solid #9FB5D2;
+	background-color: #fff;
+}

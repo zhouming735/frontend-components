@@ -1,0 +1,20 @@
+<script id="autoCompleteTemplate" type="text/html">
+    <div class="vs-auto-complete" data-bind="visible: sourceData().length > 0, style: {width: options.width}">
+		<ul>
+			<!-- ko foreach: sourceData -->
+			<li data-bind="css: { keyhover: $index()==$root.keySelect() }, click:function(){ $root.confirm($data);return true; }">
+				<!-- ko text: $root.render($data) --><!-- /ko -->
+			</li>
+			<!-- /ko -->
+		</ul>
+		<!-- ko if: options.pagination == true -->
+		<div class="vs-auto-complete-page" >
+			<a href="javascript:" data-bind="click: goPrev">上一页</a>
+			<span>
+				<strong data-bind="text: currentPageIndex"></strong>/<strong data-bind="text: maxPageIndex"></strong>
+			</span>
+			<a href="javascript:" data-bind="click: goNext">下一页</a>
+		</div>
+		<!-- /ko -->
+    </div>
+</script>

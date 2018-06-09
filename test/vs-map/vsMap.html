@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../lib/raphael/raphael.js"></script>
+    <!-- <script src="../../lib/raphael/raphael.min.js"></script> -->
+
+    <script src="map-data.js"></script>
+    <script src="shenzhen.js"></script>
+    <!-- <script src="../../src/vs-map/vsMap.js"></script> -->
+    <script src="../../src/vs-map/vsMap.js"></script>
+    <script>
+        +function (window, document, $, undefined) {
+            var defaults = {
+                mapData: {},
+                mapData2: {}
+            };
+
+            function ViewModel(config) {
+                var self = this;
+                self.config = config;
+
+                initMap.call(self);
+                initMap2.call(self);
+                initUI.call(self);
+                //$("#submap").hide();
+            }
+
+            var scale = 0.8;
+            function initMap() {
+                var self = this;
+                self.vsMap = $("#map").vsMap({
+                    width: 700,
+		            height: 600,
+                    scale: scale,
+                    data: self.config.mapData,
+                    renderFn: function(map, area){
+                        if(area.id == "460100"){
+                            area.attr({
+                                fill: 'red'
+                            })
+                        }
+
+                        var xx = area.getBBox().x + (area.getBBox().width / 2);
+                        var yy = area.getBBox().y + (area.getBBox().height / 2) -15;
+                        area.kpi = map.paper.text(xx, yy, "100").attr(map.options.textAttr);
+
+                        area.click(function(){
+                            $("#map").hide();
+                            $("#submap").show();
+
+                            var paper=self.vsMap2.paper;
+                            var items = self.config.mapData2;
+                            var opt=self.vsMap2.options;
+                            for(i=0;i<items.length;i++){
+                                var item=items[i];
+                                var area = paper.path(item.path);
+                                area.attr(opt.areaAttr);
+                                var xx = area.getBBox().x + (area.getBBox().width / 2);
+                                var yy = area.getBBox().y + (area.getBBox().height / 2);
+                                area.text = paper.text(xx, yy, item.name).attr(opt.textAttr);
+
+                                area.hover(function(){
+                                    area.data("oldAttr", area.attr());
+                                    area.attr(opt.areaSelAttr);
+                                    if(opt.hoverInFn){
+                                        opt.hoverInFn(self.vsMap2, area);
+                                    }
+
+                                }, function(){
+                                    var oldAttr = area.data("oldAttr");
+                                    area.attr(oldAttr);
+                                    if(opt.hoverOutFn){
+                                        opt.hoverOutFn(self.vsMap2, area);
+                                    }
+                                }, null, null);
+
+                                area.click(function(){
+                                    alert(area.id);
+                                })
+
+                                
+                                if(item.id == "longgang"){
+                                    area.attr({
+                                        fill: 'red'
+                                    });
+                                }
+                            }
+                            
+                            /*$.ajax({
+                                type: "GET",
+                                url: "shenzhen.js",
+                                success: function(data){
+                                   //self.vsMap.data=eval(data);
+                                   //self.vsMap.reload(self.vsMap); 
+                                   
+                                   $("#map").hide();
+                                   $("#submap").vsMap({
+                                        width: 700,
+                                        height: 600,
+                                        scale: scale,
+                                        data: eval(data),
+                                        renderFn: function(map, area){
+                                            if(area.id == "longgang"){
+                                                area.attr({
+                                                    fill: 'red'
+                                                })
+                                            }
+                                            var xx = area.getBBox().x + (area.getBBox().width / 2);
+                                            var yy = area.getBBox().y + (area.getBBox().height / 2) -15;
+                                            area.kpi = map.paper.text(xx, yy, "200").attr(map.options.textAttr);
+                                            
+                                        }
+                                    });                                             
+                                }
+                            }); */
+                        })
+                    },
+                    hoverInFn: function(map, area){
+
+                    },
+                    hoverOutFn: function(map, area){
+
+                    }
+                });
+            }
+
+            function initMap2() {
+                var self = this;
+                self.vsMap2 = $("#submap").vsMap({
+                    width: 700,
+		            height: 600,
+                    scale: scale,
+                    data: [],
+                });
+            }
+            
+            function initUI() {
+                var self = this;
+
+                $("#up").click(function(){
+                    scale = scale + 0.1;
+                    self.vsMap.scaleAll(scale)
+                })
+
+                $("#down").click(function(){
+                    scale = scale - 0.1;
+                    self.vsMap.scaleAll(scale)
+                })
+
+                $("#back").click(function(){
+                 
+                   $("#map").show();
+                   $("#submap").hide();
+                   
+                })
+            }
+
+            $(function () {
+                var config = $.extend(true, {}, defaults, window.$vsViewConfig)
+                new ViewModel(config)
+            })
+        }(window, document, jQuery);
+    </script>
+    <script>
+        window.$vsViewConfig = {
+            mapData: window.$mapData,
+            mapData2: window.shenzhen
+        };
+    </script>
+</head>
+
+<body>
+    <input id="up" type="button" value="放大" /> <input id="down" type="button" value="缩小" /> <input id="back" type="button" value="返回" />
+
+    <div id="map"></div>
+    <div id="submap"></div>
+</body>
+
+</html>

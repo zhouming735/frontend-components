@@ -1,0 +1,887 @@
+/**遮罩层**/
+.vs-mask {
+	background: #ccc;
+	z-index: 9999;
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: none;
+}
+
+.vs-mask-box {
+	z-index: 10000;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: none;
+}
+
+.vs-mask-box-content {
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: center;
+	border: 2px solid #949494;
+	padding-left: 10px;
+	background: #fff url(images/vs_loading.gif) no-repeat scroll 10px center;
+}
+
+/**浮动层**/
+.vs-simplemodal-overlay {
+	background: #ccc;
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+}
+
+.vs-simplemodal-modalCloseImg {
+	background: url(images/vs_clientWindow_coolite.gif) no-repeat 0px 0px;
+	width: 15px;
+	height: 15px;
+	display: inline;
+	z-index: 3200;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}
+
+.vs-simplemodal-modalTitle {
+	height: 15px;
+	line-height: 15px;
+/* 	width: 280px; */
+	top: 5px;
+	left: 5px;
+	position: absolute;
+	display: inline;
+	z-index: 3200;
+	font-size: 14px;
+}
+
+.vs-simplemodal-close {
+	
+}
+
+.vs-simplemodal-container {
+	padding: 25px 5px 5px 5px;
+	background: url(images/vs_clientWindow_topLine.gif) repeat-x #EDF4FB;
+	border: 1px solid #93AAC6;
+	border-top: none;
+}
+
+.vs-simplemodal-top{
+ 	width: 100%;
+ 	height: 25px;
+ 	position: absolute;
+ 	top: 0;
+	left: 0;
+	display: inline;
+	z-index: 3100;
+    cursor: move;
+}
+
+
+.vs-simplemodal-wrap {
+	
+}
+
+.vs-simplemodal-data {
+	
+}
+/**日历**/
+.vs-calendar {
+	width: 180px;
+	background-color: #FFFFFF;
+	border: #bbb 1px solid;
+	padding: 2px;
+	font-size: 9pt;
+}
+
+.vs-calendar .vs-calendar-NavImg a {
+	display: block;
+	cursor: pointer;
+	height: 16px;
+	width: 16px;
+}
+
+.vs-calendar .vs-calendar-NavImgll a {
+	float: left;
+	background: transparent url(images/vs_calendar_img.gif) no-repeat scroll
+		0 0;
+}
+
+.vs-calendar .vs-calendar-NavImgl a {
+	float: left;
+	background: transparent url(images/vs_calendar_img.gif) no-repeat scroll
+		-16px 0;
+}
+
+.vs-calendar .vs-calendar-NavImgr a {
+	float: right;
+	background: transparent url(images/vs_calendar_img.gif) no-repeat scroll
+		-32px 0;
+}
+
+.vs-calendar .vs-calendar-NavImgrr a {
+	float: right;
+	background: transparent url(images/vs_calendar_img.gif) no-repeat scroll
+		-48px 0;
+}
+
+.vs-calendar .vs-calendar-dpTitle {
+	height: 24px;
+}
+
+.vs-calendar .vs-calendar-yminput {
+	text-align: right;
+	height: 20px;
+	border: 0px;
+	width: 65px;
+	cursor: pointer;
+}
+
+.vs-calendar .vs-calendar-yminput2 {
+	text-align: left;
+	height: 20px;
+	border: 0px;
+	width: 35px;
+	cursor: pointer;
+}
+
+.vs-calendar .vs-calendar-menuSel {
+	z-index: 1;
+	position: absolute;
+	background-color: #FFFFFF;
+	border: #ccc 1px solid;
+	display: none;
+}
+
+.vs-calendar .vs-calendar-menu {
+	cursor: pointer;
+	background-color: #fff;
+}
+
+.vs-calendar .vs-calendar-menuOn {
+	cursor: pointer;
+	background-color: #BEEBEE;
+}
+
+.vs-calendar .vs-calendar-menuInvalid {
+	color: #aaa;
+}
+
+.vs-calendar .vs-calendar-YMenu {
+	margin-top: 20px;
+}
+
+.vs-calendar .vs-calendar-MMenu {
+	margin-top: 20px;
+}
+
+.vs-calendar .vs-calendar-HHMenu {
+	margin-top: 20px;
+}
+
+.vs-calendar .vs-calendar-MMMenu {
+	margin-top: 20px;
+}
+
+.vs-calendar .vs-calendar-SSMenu {
+	margin-top: 20px;
+}
+
+.vs-calendar .vs-calendar-Wweek {
+	text-align: center;
+	background: #DAF3F5;
+	border-right: #BDEBEE 1px solid;
+}
+
+.vs-calendar .vs-calendar-MTitle {
+	background-color: #BDEBEE;
+}
+
+.vs-calendar .vs-calendar-WdayTable {
+	width: 100%;
+	line-height: 20px;
+	border: #c5d9e8 1px solid;
+	text-align: center;
+}
+
+.vs-calendar .vs-calendar-Wday {
+	cursor: pointer;
+}
+
+.vs-calendar .vs-calendar-WdayOn {
+	cursor: pointer;
+	background-color: #C0EBEF;
+}
+
+.vs-calendar .vs-calendar-Wwday {
+	cursor: pointer;
+	color: #FF2F2F;
+}
+
+.vs-calendar .vs-calendar-WwdayOn {
+	cursor: pointer;
+	color: #000;
+	background-color: #C0EBEF;
+}
+
+.vs-calendar .vs-calendar-Wtoday {
+	cursor: pointer;
+	color: blue;
+}
+
+.vs-calendar .vs-calendar-Wselday {
+	cursor: pointer;
+	background-color: #A9E4E9;
+}
+
+.vs-calendar .vs-calendar-WspecialDay {
+	background-color: #66F4DF;
+}
+
+.vs-calendar .vs-calendar-WotherDay {
+	cursor: pointer;
+	color: #6A6AFF;
+}
+
+.vs-calendar .vs-calendar-WotherDayOn {
+	cursor: pointer;
+	background-color: #C0EBEF;
+}
+
+.vs-calendar .vs-calendar-WinvalidDay {
+	color: #aaa;
+}
+
+.vs-calendar .vs-calendar-dpTime {
+	margin: 3px 0 0 30px;
+}
+
+.vs-calendar .vs-calendar-dpTimeStr {
+	padding: 0 5px 0 0;
+}
+
+.vs-calendar .vs-calendar-dpTime input {
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	text-align: left;
+	border: #ccc 1px solid;
+	margin: 0;
+}
+
+.vs-calendar .vs-calendar-dpTime .vs-calendar-dpTime-tB {
+	border-right: 0px;
+}
+
+.vs-calendar .vs-calendar-dpTime .vs-calendar-dpTime-tM {
+	border-left: 0;
+	border-right: 0;
+}
+
+.vs-calendar .vs-calendar-dpTime .vs-calendar-dpTime-tE {
+	border-left: 0;
+}
+
+.vs-calendar .vs-calendar-dpTime .vs-calendar-dpTime-tm {
+	width: 7px;
+	border-left: 0;
+	border-right: 0;
+}
+
+.vs-calendar .vs-calendar-dpTimeUp {
+	height: 10px;
+	width: 13px;
+	border: 0px;
+	background: url(images/vs_calendar_img.gif) no-repeat -32px -16px;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.vs-calendar .vs-calendar-dpTimeDown {
+	height: 10px;
+	width: 13px;
+	border: 0px;
+	background: url(images/vs_calendar_img.gif) no-repeat -48px -16px;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.vs-calendar .vs-calendar-dpQS {
+	float: left;
+	margin-right: 3px;
+	margin-top: 3px;
+	background: url(images/vs_calendar_img.gif) no-repeat 0px -16px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.vs-calendar .vs-calendar-dpControl {
+	text-align: center;
+}
+
+.vs-calendar .vs-calendar-dpButton {
+	height: 20px;
+	width: 45px;
+	border: #ccc 1px solid;
+	margin-top: 2px;
+	margin-right: 1px;
+}
+.vs-page {
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	height: 30px;
+	background: #fff;
+}
+
+.vs-page a.p_first_disabled, .vs-page a.p_first,
+	.vs-page a.p_first:hover, .vs-page a.p_first:active,
+	.vs-page a.p_pre_disabled, .vs-page a.p_pre,
+	.vs-page a.p_pre:hover, .vs-page a.p_pre:active,
+	.vs-page a.p_next_disabled, .vs-page a.p_next,
+	.vs-page a.p_next:hover, .vs-page a.p_next:active,
+	.vs-page a.p_last_disabled, .vs-page a.p_last,
+	.vs-page a.p_last:hover, .vs-page a.p_last:active
+	{
+	padding: 2px 5px;
+	margin: 2px;
+	border: 1px solid #aaaadd;
+	text-decoration: none;
+	color: #006699;
+	cursor: pointer;
+}
+
+.vs-page a.p_first_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_first {
+	
+}
+
+.vs-page a.p_first:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_first:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_pre_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_pre {
+	
+}
+
+.vs-page a.p_pre:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_pre:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_next_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_next {
+	
+}
+
+.vs-page a.p_next:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_next:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_last_disabled {
+	border: 1px solid #eee;
+	color: #ddd;
+	cursor: default;
+	color: #ddd;
+}
+
+.vs-page a.p_last {
+	
+}
+
+.vs-page a.p_last:hover {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page a.p_last:active {
+	border: 1px solid #0066CC;
+	color: black;
+	text-decoration: none;
+}
+
+.vs-page .pagego {
+	width: 40px;
+	height: 22px;
+	cursor: pointer;
+}
+
+.vs-page input[type=text] {
+	padding: 0 2px;
+	width: 30px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.vs-page select {
+	vertical-align: middle;
+	display: inline-block;
+	height: 22px;
+	margin-top: -3px;
+}
+
+.vs-page strong {
+	color: #3D89E0;
+}
+.vs-grid {
+	width: 100%;
+	border-top: 1px #afafaf solid;
+}
+
+.vs-grid tr {
+	color: #333;
+	height: 25px;
+	line-height: 25px;
+}
+
+.vs-grid tr.bg {
+	background: #fff;
+}
+
+.vs-grid tr.alterbg {
+	background: #f9f9f9;
+}
+
+.vs-grid tr.selectbg {
+	background: #4299cc;
+}
+
+.vs-grid th {
+	background: #f3f3f3;
+	white-space: nowrap;
+	text-align: center;
+	border-right: 1px #afafaf solid;
+	border-bottom: 1px #ddd solid;
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+}
+
+.vs-grid th:last-child {
+	border-right: 0;
+}
+
+.vs-grid td {
+	padding: 0 3px;
+	border-right: 1px #afafaf solid;
+	border-bottom: 1px #ddd solid;
+	empty-cells: show;
+}
+
+.vs-grid td a {
+	padding: 0 2px;
+}
+
+.vs-grid td:last-child {
+	border-right: 0;
+}
+/**自动完成**/
+.vs-auto-complete {
+	background-color: #fff;
+	border: 1.0px solid #ccc;
+	box-shadow: 1.0px 1.0px 3.0px #ededed;
+	-webkit-box-shadow: 1.0px 1.0px 3.0px #ededed;
+	-moz-box-shadow: 1.0px 1.0px 3.0px #ededed;
+	-o-box-shadow: 1.0px 1.0px 3.0px #ededed;
+	_overflow: hidden;
+}
+
+.vs-auto-complete li {
+	color: #000;
+	line-height: 22.0px;
+	padding: 0.0 8.0px;
+	cursor: default;
+}
+
+.vs-auto-complete li.keyhover {
+	background-color: #f0f0f0;
+}
+
+.vs-auto-complete li:hover {
+	background-color: #f0f0f0;
+	cursor: pointer;
+}
+
+.vs-auto-complete-page {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	height: 25px;
+	line-height: 25px;
+}
+/**树选择**/
+.vs-tree-selector-tree {
+	overflow: auto;
+	width: 250.0px;
+	max-height: 300.0px;
+	border: 1.0px solid #9FB5D2;
+	background-color: #fff;
+}
+.vs-member-selector {
+	margin: 0 auto;
+	padding: 5px 0;
+}
+
+.vs-member-selector .vs-clear {
+	clear: both;
+	display: block;
+	float: none;
+	font-size: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	line-height: 0;
+}
+
+.vs-member-selector .vs-float-left {
+	float: left;
+	_display: inline;
+}
+
+.vs-member-selector .vs-float-right {
+	float: right;
+	_display: inline;
+}
+
+.vs-member-selector .vs-member-selector-zone01 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+}
+
+.vs-member-selector .vs-member-selector-zone02 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+	margin: 0 5px;
+}
+
+.vs-member-selector .vs-member-selector-zone03 {
+	width: 80px;
+	padding-top: 80px;
+}
+
+.vs-member-selector .vs-member-selector-zone04 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+}
+
+.vs-member-selector .vs-member-selector-zone-header {
+	color: White;
+	background: url(images/vs_memberSelector_titleBG.gif);
+	line-height: 30px;
+	font-weight: bold;
+	text-indent: 3px;
+}
+
+.vs-member-selector .vs-member-selector-zone-con-tree {
+	overflow: auto;
+	border: 1px solid #EFEFEF;
+	height: 287px;
+}
+
+.vs-member-selector .vs-member-selector-zone-con-btn {
+	background: url(images/vs_memberSelector_btn.png) no-repeat;
+	border: none;
+	width: 70px;
+	height: 22px;
+	margin: 0 5px 18px 5px;
+	cursor: pointer;
+}
+
+.vs-member-selector .vs-member-selector-zone-con-input {
+	margin: 5px 5px;
+	padding: 0 5px;
+	width: 200px;
+	height: 22px;
+	line-height: 22px;
+	border: 1px #BED6E8 solid;
+}
+
+.vs-member-selector .vs-member-selector-zone-con-select01 {
+	font-size: 13px;
+	border: 1px solid #EFEFEF;
+	width: 220px;
+	height: 287px;
+}
+
+.vs-member-selector .vs-member-selector-zone-con-select02 {
+	font-size: 13px;
+	border: 1px solid #EFEFEF;
+	width: 220px;
+	height: 321px;
+}
+
+.vs-member-selector .vs-member-selector-zone-con-select03 {
+	font-size: 13px;
+	border:none;
+	height: 287px;
+}
+
+.vs-member-selector .vs-member-selector-footer {
+	padding-top: 5px;
+	text-align: right;
+}
+.vs-team-member-selector {
+	margin: 0 auto;
+	padding: 5px 0;
+}
+
+.vs-team-member-selector .vs-clear {
+	clear: both;
+	display: block;
+	float: none;
+	font-size: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	line-height: 0;
+}
+
+.vs-team-member-selector .vs-float-left {
+	float: left;
+	_display: inline;
+}
+
+.vs-team-member-selector .vs-float-right {
+	float: right;
+	_display: inline;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone01 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone02 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+	margin: 0 5px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone03 {
+	width: 80px;
+	padding-top: 80px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone04 {
+	width: 220px;
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-header {
+	color: White;
+	background: url(images/vs_memberSelector_titleBG.gif);
+	line-height: 30px;
+	font-weight: bold;
+	text-indent: 3px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con {
+	
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-tree {
+	overflow: auto;
+	border: 1px solid #EFEFEF;
+	height: 287px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-btn {
+	background: url(images/vs_memberSelector_btn.png) no-repeat;
+	border: none;
+	width: 70px;
+	height: 22px;
+	margin: 0 5px 18px 5px;
+	cursor: pointer;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-input {
+	margin: 5px 5px;
+	padding: 0 5px;
+	width: 200px;
+	height: 22px;
+	line-height: 22px;
+	border: 1px #BED6E8 solid;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-select01 {
+	font-size: 13px;
+	border: 1px solid #EFEFEF;
+	width: 220px;
+	height: 287px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-select02 {
+	font-size: 13px;
+	border: 1px solid #EFEFEF;
+	width: 220px;
+	height: 321px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-zone-con-select03 {
+	font-size: 13px;
+	border:none;
+	height: 287px;
+}
+
+.vs-team-member-selector .vs-team-member-selector-footer {
+	padding-top: 5px;
+	text-align: right;
+}
+.vs-team-member-one-selector {
+	margin: 0 auto;
+	padding: 5px 0;
+}
+
+.vs-team-member-one-selector .vs-clear {
+	clear: both;
+	display: block;
+	float: none;
+	font-size: 0;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	line-height: 0;
+}
+
+.vs-team-member-one-selector .vs-float-left {
+	float: left;
+	_display: inline;
+}
+
+.vs-team-member-one-selector .vs-float-right {
+	float: right;
+	_display: inline;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone01 {
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone02 {
+	height: 351px;
+	background-color: White;
+	border: 1px solid #9FB5D2;
+	margin: 0 5px;
+}
+
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone-header {
+	color: White;
+	background: url(images/vs_memberSelector_titleBG.gif);
+	line-height: 30px;
+	font-weight: bold;
+	text-indent: 3px;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone-con-tree {
+	overflow: auto;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone-con-btn {
+	background: url(images/vs_memberSelector_btn.png) no-repeat;
+	border: none;
+	width: 70px;
+	height: 22px;
+	margin: 0 5px 18px 5px;
+	cursor: pointer;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone-con-input {
+	margin: 5px 5px;
+	padding: 0 5px;
+	line-height: 22px;
+	border: 1px #BED6E8 solid;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone-con-div {
+	margin: 0 0 0 5px;
+	overflow-x:auto;
+	overflow-y:hidden;
+	border: 1px solid #EFEFEF;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-zone-con-select {
+	font-size: 13px;
+	border:none;
+	height: 280px;
+	width: 100%;
+}
+
+.vs-team-member-one-selector .vs-team-member-one-selector-footer {
+	padding-top: 5px;
+	text-align: right;
+}

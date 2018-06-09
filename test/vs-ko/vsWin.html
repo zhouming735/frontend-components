@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="../css/main.css" rel="stylesheet" />
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/hazzik-jquery.livequery/1.3.6/jquery.livequery.js"></script>
+    <script src="https://cdn.bootcss.com/knockout/3.4.2/knockout-min.js"></script>
+    <script src="../../lib/knockout/knockout.multimodels.min.js"></script>
+
+    <link href="../../src/vs-ko/css/vsWin.css" rel="stylesheet" />
+    <script src="../../src/vs-ko/js/vsWin.js"></script>
+    <!-- <link href="../../dist/vs-ko/css/vs-ko.min.css" rel="stylesheet" />
+    <script src="../../dist/vs-ko/js/vs-ko.min.js"></script> -->
+    <script>
+        +function (window, document, $, ko, undefined) {
+            var defaults = {
+                viewName: ""
+            };
+
+            function ViewModel(config) {
+                var self = this;
+                self.config = config;
+
+                initUI.call(self);
+            }
+
+            function initUI() {
+                var self = this;
+                
+                self.winVM = new ko.vsWin.ViewModel({
+                    autoResize: true
+                });
+
+                self.domEvent = {
+                    showWin: function (data, event) {
+                        self.winVM.open({
+                            title : "标题"
+                        });
+                    },
+                    addHight: function(){
+                        $("#t1").height(400)
+                    }
+                };
+            }
+
+            $(function () {
+                var config = $.extend(true, {}, defaults, window.$vsViewConfig)
+                var viewModel = new ViewModel(config)
+                ko.attach(config.viewName, viewModel)
+            })
+        }(window, document, jQuery, ko);
+    </script>
+    <script>
+        window.$vsViewConfig = {
+            viewName: "viewName"
+        }
+    </script>
+</head>
+<body>
+    <div data-model="viewName" style="height:100px;margin-top:600px; margin-left:100px">
+        <input type="button" data-bind="click:domEvent.showWin" value="显示"/>
+    </div>
+
+    <div data-model="viewName" data-bind="vsWin:winVM" style="width: 500px; display: none;">
+		<table>
+            <tr>
+                <td>
+                    <div id="t1" style="height:300px;">12345</div>
+                </td>
+            </tr>
+			<tr>
+				<td><input type="button" class="vs-simplemodal-close" value="关闭" /><input type="button" data-bind="click:domEvent.addHight" value="测试高度" /></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
