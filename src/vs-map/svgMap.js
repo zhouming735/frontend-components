@@ -1,15 +1,14 @@
 /*!
- * SVG Map
- * @version v1.0.2
- * @author  Rocky(rockyuse@163.com)
- * @date    2014-01-16
+ * Raphael svg-Map
+ * @version v1.0.0
+ * @author  lomen(zhouming735@163.com)
+ * @date    2018-06-09
  *
- * (c) 2012-2013 Rocky, http://sucaijiayuan.com
  * This is licensed under the GNU LGPL, version 2.1 or later.
  * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
  */
 
-;!function (win, $, undefined) {
+;!function (window, $, undefined) {
 	var SVGMap = (function () {
 		function SVGMap(dom, options) {
 			this.dom = dom;
@@ -17,9 +16,9 @@
 			this.render();
 		}
 		SVGMap.prototype.options = {
-			mapName: 'china',
-			mapWidth: 500,
-			mapHeight: 400,
+			mapName: 'gd',
+			mapWidth: 700,
+			mapHeight: 600,
 			stateColorList: ['2770B5', '429DD4', '5AABDA', '1C8DFF', '70B3DD', 'C6E1F4', 'EDF2F6'],
 			stateDataAttr: ['stateInitColor', 'stateHoverColor', 'stateSelectedColor', 'baifenbi'],
 			stateDataType: 'json',
@@ -30,19 +29,30 @@
 			strokeColor: 'F9FCFE',
 
 			stateInitColor: 'AAD5FF',
-			stateHoverColor: 'feb41c',
-			stateSelectedColor: 'E32F02',
+			stateHoverColor: 'FFE793',
+			stateSelectedColor: 'feb41c',
 			stateDisabledColor: 'eeeeee',
+			
+			textAttr: {
+				"fill": "#000",
+				"font-size": "12px",
+				"cursor": "pointer"
+			},
 
+			showText: true,
 			showTip: true,
-			stateTipWidth: 100,
+			stateTipWidth: 120,
 			//stateTipHeight: 50,
 			stateTipX: 0,
 			stateTipY: -10,
+			
+			stateTextHtml: function(stateData,obj){
+				return obj.name;
+			},
 			stateTipHtml: function (stateData, obj) {
 				return obj.name;
 			},
-
+		    
 			hoverCallback: function (stateData, obj) {},
 			clickCallback: function (stateData, obj) {},
 			external: false
@@ -56,7 +66,7 @@
 			return this;
 		};
 
-		SVGMap.prototype.scaleRaphael = function (container, width, height) {
+		SVGMap.prototype.scaleRaphael = function (container,x,y,width, height,scale) {
 			var wrapper = document.getElementById(container);
 			if (!wrapper.style.position) wrapper.style.position = "relative";
 			wrapper.style.width = width + "px";
@@ -73,15 +83,21 @@
 			var paper = new Raphael(nestedWrapper, width, height);
 			var vmlDiv;
 			if (Raphael.type == "SVG") {
-				paper.canvas.setAttribute("viewBox", "0 0 " + width + " " + height);
+				//paper.canvas.setAttribute("viewBox", "0 0 " + width + " " + height);
+				paper.canvas.setAttribute("viewBox", x+" "+y+" " + width + " " + height);
+				//paper.canvas.setAttribute("preserveAspectRatio", "xMidYMid slice");
 			} else {
 				vmlDiv = wrapper.getElementsByTagName("div")[0];
 			}
-			paper.changeSize = function (w, h, center, clipping) {
+			paper.changeSize = function (w, h,s, center, clipping) {
 				clipping = !clipping;
 				var ratioW = w / width;
 				var ratioH = h / height;
-				var scale = ratioW < ratioH ? ratioW : ratioH;
+				var scale =1.0;
+				if(s)
+				   scale = s;
+				else
+				   scale =ratioW < ratioH ? ratioW : ratioH;
 				var newHeight = parseInt(height * scale);
 				var newWidth = parseInt(width * scale);
 				if (Raphael.type == "VML") {
@@ -128,7 +144,7 @@
 			paper.scaleAll = function (amount) {
 				paper.changeSize(width * amount, height * amount);
 			};
-			paper.changeSize(width, height);
+			paper.changeSize(width, height,scale,false,true);
 			paper.w = width;
 			paper.h = height;
 			return paper;
@@ -195,8 +211,13 @@
 				};
 
 			var current, reTimer;
-
-			var r = this.scaleRaphael(_self.attr('id'), mapConfig.width, mapConfig.height),
+            var x=0,y=0;
+            if(mapConfig.x)
+            	x=mapConfig.x;
+            if(mapConfig.y)
+            	y=mapConfig.y;
+			
+			var r = this.scaleRaphael(_self.attr('id'), x,y,mapConfig.width, mapConfig.height,mapConfig.scale);
 				attributes = {
 					fill: '#' + opt.stateInitColor,
 					cursor: 'pointer',
@@ -238,7 +259,14 @@
 					obj.attr({
 						fill: initColor
 					});
-
+					
+					if(opt.showText){
+						var xx = obj.getBBox().x + (obj.getBBox().width / 2);
+						var yy = obj.getBBox().y + (obj.getBBox().height / 2)-5;
+						obj.text = r.text(xx, yy, opt.stateTextHtml(stateData,obj)).attr(opt.textAttr);
+					}
+					
+					
 					obj.hover(function (e) {
 						if (this != current) {
 							this.animate({
@@ -262,6 +290,7 @@
 						}
 
 						opt.hoverCallback(stateData, this);
+						
 					});
 
 					obj.mouseout(function () {
@@ -291,9 +320,11 @@
 
 						current = this;
 						opt.clickCallback(stateData, this);
+						
 					});
+					
 				}
-				r.changeSize(opt.mapWidth, opt.mapHeight, false, false);
+				r.changeSize(mapConfig.width, mapConfig.height,mapConfig.scale, true, true);
 			}
 			document.body.onmousemove = function (e) {
 				var _offsetXY = new offsetXY(e);

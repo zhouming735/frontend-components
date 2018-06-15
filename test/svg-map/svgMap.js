@@ -1,10 +1,9 @@
 /*!
  * SVG Map
- * @version v1.0.2
- * @author  Rocky(rockyuse@163.com)
+ * @version v1.0.0
+ * @author  lomen
  * @date    2014-01-16
  *
- * (c) 2012-2013 Rocky, http://sucaijiayuan.com
  * This is licensed under the GNU LGPL, version 2.1 or later.
  * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
  */
